@@ -34,11 +34,13 @@ function App() {
 
     const getItemQuantityFromApiRespose = apiData.find(product => product._id === item._id);
 
-
-
-
-
     const existingItem = cart.find(cartItem => cartItem._id === getItemQuantityFromApiRespose._id);
+
+    if (cart.reduce((acc, cartItem) => acc + cartItem.quantity, 0) >= 10) {
+      alert("Can't add more than 10 items");
+      return;
+    }
+
 
     if (existingItem) {
       if (existingItem.quantity + 1 > getItemQuantityFromApiRespose.quantity) {

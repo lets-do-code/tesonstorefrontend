@@ -42,7 +42,7 @@ const ShoppingCarts = ({ cart, onAddToCart, removeItemFromCart, handleRemoveItem
     }
     return (
         <div className='px-5 my-10 flex flex-col gap-10'>
-            <div className='font-medium'>Add To Cart</div>
+            <div className='font-medium'>Your Items</div>
             <div className=''>
 
                 {cart?.length === 0 ? (
@@ -119,7 +119,7 @@ const ShoppingCarts = ({ cart, onAddToCart, removeItemFromCart, handleRemoveItem
                                 className='bg-orange-500 w-full md:w-[300px] text-white border border-gray-300 px-2 py-2 rounded'
                             >
                                 {status === false
-                                    ? `Confirm Order $${totalPrice?.toFixed(2)} ${cart[0]?.currency}`
+                                    ? `Confirm Order ${totalPrice?.toFixed(2)} ${cart[0]?.currency}`
                                     : status === true
                                         ? "Order Placed"
                                         : "Order Pending..."
