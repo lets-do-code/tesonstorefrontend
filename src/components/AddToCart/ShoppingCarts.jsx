@@ -9,7 +9,7 @@ const ShoppingCarts = ({ cart, onAddToCart, removeItemFromCart, handleRemoveItem
 
     const [status, setStatus] = useState(false);
 
-    const host = "http://localhost:8000/api/placeorder";
+    const host = "https://teststoreserver.onrender.com/api/placeorder";
 
     const handleConfirmOrder = async () => {
         try {

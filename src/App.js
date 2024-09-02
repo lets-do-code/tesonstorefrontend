@@ -12,7 +12,7 @@ function App() {
   const [cart, setCart] = useState([]);
 
   // const host = "https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json"
-  const host = "http://localhost:8000/api/getallproduct"
+  const host = "https://teststoreserver.onrender.com/api/getallproduct"
 
   // Api response
   const getdata = async () => {
