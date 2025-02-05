@@ -57,6 +57,8 @@ function App() {
     } else {
       setCart([...cart, { ...item, quantity: 1 }]);
     }
+
+
   };
 
 
