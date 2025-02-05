@@ -4,11 +4,12 @@ import Filter from '../components/Filter/Filter';
 import SearchFilter from '../components/Filter/SearchFilter';
 import ProductCard from '../components/ProductCard/ProductCard';
 
-
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Home = ({ apiData, onAddToCart }) => {
 
 
+    const [captchaValue, setCaptchaValue] = useState(null);
 
     const [searchItem, setSearchItem] = useState('')
     const [activeSection, setActiveSection] = useState('products'); // default to products
@@ -48,9 +49,60 @@ const Home = ({ apiData, onAddToCart }) => {
     };
 
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!captchaValue) {
+            alert("Please complete the CAPTCHA verification!");
+            return;
+        }
+
+        const response = await fetch("http://localhost:8000/verify-captcha", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: captchaValue }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert("Form submitted successfully!");
+        } else {
+            alert("CAPTCHA verification failed!");
+        }
+    };
+
+
 
     return (
         <div className="px-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 h-screen p-4">
+
+            <form onSubmit={handleSubmit} className="p-4 border rounded-md">
+                <input
+                    type="text"
+                    placeholder="Enter your name"
+                    className="border p-2 w-full mb-3"
+                    required
+                />
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    className="border p-2 w-full mb-3"
+                    required
+                />
+
+                <ReCAPTCHA
+                    sitekey="6LckbM0qAAAAAGpFbSroDiQcC9f9fX0u26sWFhad"
+                    onChange={(value) => setCaptchaValue(value)}
+                />
+
+                <button
+                    type="submit"
+                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                    Submit
+                </button>
+            </form>
+
             <div className="flex sm:overflow-y-auto  sm:mb-16 flex-col sec-two max-sm:relative">
 
                 <div className=' max-sm:hidden flex gap-2 my-4 text-[19px] justify-start items-center font-medium max-sm:w-full'>
